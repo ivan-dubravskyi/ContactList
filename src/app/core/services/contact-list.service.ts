@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Contact } from '../models';
+import { SnackBarService } from './snack-bar.service';
 
 @Injectable({
   providedIn: 'root',
@@ -11,8 +12,7 @@ export class ContactListService {
   private contactsSubject = new BehaviorSubject<Contact[]>([]);
   public contacts$: Observable<Contact[]> = this.contactsSubject.asObservable();
 
-  // private loader = new BehaviorSubject<boolean>(false);
-  // public showLoader$: Observable<boolean> = this.loader.asObservable();
+  constructor(private snackBar: SnackBarService) {}
 
   initializeContacts(): void {
     const contacts = this.loadContactsFromLocalStorage();
@@ -27,15 +27,19 @@ export class ContactListService {
     const contacts = this.contactsSubject.value;
     const index = contacts.findIndex((c) => c.id === contact.id);
 
+    let message;
     if (index !== -1) {
       contacts[index] = contact;
+      message = 'Successfully edited!';
     } else {
       contact.id = Date.now();
       contacts.push(contact);
+      message = 'Successfully added!';
     }
 
     this.contactsSubject.next(contacts);
     this.saveContactsToLocalStorage(contacts);
+    this.snackBar.showMessage(message);
   }
 
   getContactById(id: number): Contact | null {
