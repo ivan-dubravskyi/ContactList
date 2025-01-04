@@ -16,6 +16,15 @@ export class ContactListService {
 
   constructor() {}
 
+  initializeContacts(): void {
+    const contacts = this.loadContactsFromLocalStorage();
+    this.contactsSubject.next(contacts);
+
+    if (!contacts.length) {
+      this.mockData();
+    }
+  }
+
   saveContact(contact: Contact): void {
     const contacts = this.contactsSubject.value;
     const index = contacts.findIndex(c => c.id === contact.id);
@@ -32,7 +41,8 @@ export class ContactListService {
   }
 
   getContactById(id: number): Contact | null {
-    return this.contactsSubject.value.find(contact => contact.id === id) || null;
+    const contacts = this.loadContactsFromLocalStorage();
+    return contacts.find(contact => contact.id === id) || null;
   }
 
   deleteContact(id: number): void {
@@ -41,15 +51,7 @@ export class ContactListService {
     this.saveContactsToLocalStorage(contacts);
   }
 
-  initializeContacts(): void {
-    const contacts = this.loadContactsFromLocalStorage();
-    console.log(contacts)
-    this.contactsSubject.next(contacts);
 
-    if (!contacts.length) {
-      this.mockData();
-    }
-  }
 
   private loadContactsFromLocalStorage(): Contact[] {
     const storedContacts = localStorage.getItem(this.storageKey);

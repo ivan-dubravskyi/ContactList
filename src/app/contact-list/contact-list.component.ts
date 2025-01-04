@@ -7,9 +7,7 @@ import { MatButtonModule } from "@angular/material/button";
 import {CommonModule} from "@angular/common";
 import {MatTableModule} from "@angular/material/table";
 import {ContactListService} from "../core/services/contact-list.service";
-import {combineLatest, map, Observable, startWith} from "rxjs";
-import {MatDialog} from "@angular/material/dialog";
-import {AddContactDialogComponent} from "./components/add-contact-dialog/add-contact-dialog.component";
+import {combineLatest, map, startWith} from "rxjs";
 import {Contact} from "../core/models";
 import {Router} from "@angular/router";
 
@@ -33,7 +31,6 @@ export class ContactListComponent implements OnInit {
 
   constructor(
     private contactListService: ContactListService,
-    private dialog: MatDialog,
     private router: Router
 ) { }
 
@@ -43,15 +40,6 @@ export class ContactListComponent implements OnInit {
 
   openAddDialog(): void {
     this.router.navigate(['new']);
-
-    // const dialogRef = this.dialog.open(AddContactDialogComponent);
-    //
-    // dialogRef.afterClosed().subscribe(result => {
-    //   if (result !== undefined) {
-    //     console.log(result)
-    //     this.contactListService.saveContact(result);
-    //   }
-    // });
   }
 
   onDelete(element: any) {

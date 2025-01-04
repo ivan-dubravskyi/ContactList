@@ -27,12 +27,16 @@
 .contact-info {
   padding: 20px;
   background: aliceblue;
-  border-radius: 5px;
+  border-radius: 8px;
   color: #585858;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 
   p {
     display: flex;
     align-items: center;
     gap: 10px;
+    margin: 0;
   }
 }
