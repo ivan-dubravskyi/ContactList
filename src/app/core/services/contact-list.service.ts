@@ -18,9 +18,9 @@ export class ContactListService {
     const contacts = this.loadContactsFromLocalStorage();
     this.contactsSubject.next(contacts);
 
-    if (!contacts.length) {
-      this.mockData();
-    }
+    // if (!contacts.length) {
+    //   this.mockData();
+    // }
   }
 
   saveContact(contact: Contact): void {
@@ -64,28 +64,28 @@ export class ContactListService {
     localStorage.setItem(this.storageKey, JSON.stringify(contacts));
   }
 
-  private mockData() {
-    const initialContacts: Contact[] = [
-      {
-        id: 1,
-        firstName: 'John',
-        lastName: 'Doe',
-        phoneNumber: '123-456-7890',
-        email: 'john.doe@example.com',
-        birthDate: '1990-01-01',
-        address: '123 Main St',
-      },
-      {
-        id: 2,
-        firstName: 'Jane',
-        lastName: 'Smith',
-        phoneNumber: '987-654-3210',
-        email: 'jane.smith@example.com',
-        birthDate: '1995-05-15',
-        address: '456 Elm St',
-      },
-    ];
-    this.contactsSubject.next(initialContacts);
-    this.saveContactsToLocalStorage(initialContacts);
-  }
+  // private mockData() {
+  //   const initialContacts: Contact[] = [
+  //     {
+  //       id: 1,
+  //       firstName: 'John',
+  //       lastName: 'Doe',
+  //       phoneNumber: '123-456-7890',
+  //       email: 'john.doe@example.com',
+  //       birthDate: '1990-01-01',
+  //       address: '123 Main St',
+  //     },
+  //     {
+  //       id: 2,
+  //       firstName: 'Jane',
+  //       lastName: 'Smith',
+  //       phoneNumber: '987-654-3210',
+  //       email: 'jane.smith@example.com',
+  //       birthDate: '1995-05-15',
+  //       address: '456 Elm St',
+  //     },
+  //   ];
+  //   this.contactsSubject.next(initialContacts);
+  //   this.saveContactsToLocalStorage(initialContacts);
+  // }
 }

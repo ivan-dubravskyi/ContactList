@@ -5,3 +5,13 @@ tr {
     background: #dee6ff;
   }
 }
+
+.empty-state {
+  position: absolute;
+  top: 50%;
+  left: calc(50% - 85px);
+  text-align: center;
+  color: #757575;
+  margin-top: 20px;
+  font-size: 1.2em;
+}
