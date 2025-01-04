@@ -5,14 +5,14 @@ import { Contact } from '../core/models';
 import { MatCard } from '@angular/material/card';
 import { MatButton, MatIconButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
-import { MatDivider } from '@angular/material/divider';
+import { DatePipe } from '@angular/common';
 
 const colors = ['#ff5050', '#5079ff', '#50ff59', '#d950ff'];
 
 @Component({
   selector: 'app-contact-view',
   standalone: true,
-  imports: [MatCard, MatIconButton, MatIcon, MatButton, MatDivider],
+  imports: [MatCard, MatIconButton, MatIcon, MatButton, DatePipe],
   templateUrl: './contact-view.component.html',
   styleUrl: './contact-view.component.scss',
 })

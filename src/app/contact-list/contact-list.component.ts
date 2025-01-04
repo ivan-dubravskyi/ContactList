@@ -8,8 +8,10 @@ import { CommonModule } from '@angular/common';
 import { MatTableModule } from '@angular/material/table';
 import { ContactListService } from '../core/services/contact-list.service';
 import { combineLatest, map, startWith } from 'rxjs';
-import { Contact } from '../core/models';
+import { ConfirmationDialogData, Contact } from '../core/models';
 import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmationDialogComponent } from '../shared/confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   selector: 'app-contact-list',
@@ -42,6 +44,7 @@ export class ContactListComponent implements OnInit {
   constructor(
     private contactListService: ContactListService,
     private router: Router,
+    public dialog: MatDialog,
   ) {}
 
   ngOnInit() {
@@ -53,8 +56,22 @@ export class ContactListComponent implements OnInit {
   }
 
   onDelete(element: Contact) {
-    console.log(element);
-    this.contactListService.deleteContact(element.id);
+    const dialogRef = this.dialog.open<
+      ConfirmationDialogComponent,
+      ConfirmationDialogData,
+      boolean
+    >(ConfirmationDialogComponent, {
+      data: {
+        title: 'Delete Contact',
+        content: 'Are you sure you want to delete this contact?',
+      },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.contactListService.deleteContact(element.id);
+      }
+    });
   }
 
   onEdit(row: Contact) {

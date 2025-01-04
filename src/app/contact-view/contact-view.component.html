@@ -28,10 +28,10 @@
   </div>
 
   <div class="contact-info">
-    <p>
+    <a [href]="'tel:' + contact?.phoneNumber">
       <mat-icon>phone</mat-icon>
       {{ contact?.phoneNumber }}
-    </p>
+    </a>
     <p>
       <mat-icon>email</mat-icon>
       {{ contact?.email }}
@@ -42,7 +42,7 @@
     </p>
     <p>
       <mat-icon>date_range</mat-icon>
-      {{ contact?.birthDate }}
+      {{ contact?.birthDate | date: 'mediumDate' }}
     </p>
   </div>
 
