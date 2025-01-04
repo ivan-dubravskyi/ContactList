@@ -1,0 +1,48 @@
+<mat-card class="contact">
+
+  <div style="display: flex; justify-content: space-between">
+    <button mat-icon-button
+            (click)="navigateBack()">
+      <mat-icon>west</mat-icon>
+    </button>
+    <div style="display: flex; align-items: center">
+      <button mat-raised-button
+              color="primary">
+        Edit
+      </button>
+      <button
+        mat-icon-button
+        color="warn">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+  </div>
+
+  <div style="display: flex; flex-direction: row; align-items: center">
+    <div class="avatar"
+         [style.background-color]="generateRandomColor()">
+      {{ contact?.firstName?.charAt(0) }}
+    </div>
+    <h1>{{ contact?.firstName }} {{ contact?.lastName }}</h1>
+  </div>
+
+  <div class="contact-info">
+    <p>
+      <mat-icon>phone</mat-icon>
+      {{ contact?.phoneNumber }}
+    </p>
+    <p>
+      <mat-icon>email</mat-icon>
+      {{ contact?.email }}
+    </p>
+    <p>
+      <mat-icon>home</mat-icon>
+      {{ contact?.address }}
+    </p>
+    <p>
+      <mat-icon>date_range</mat-icon>
+      {{ contact?.birthDate }}
+    </p>
+  </div>
+
+</mat-card>

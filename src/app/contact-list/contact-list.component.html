@@ -1,0 +1,75 @@
+<div style="margin: 12px auto">
+  <div style="padding-bottom: 12px; display: flex; justify-content: space-between; align-items: baseline">
+    <mat-form-field appearance="outline">
+      <mat-label>Search</mat-label>
+      <input [formControl]="search"
+             matInput
+             type="text">
+      <mat-icon matPrefix>search</mat-icon>
+      <button *ngIf="search.value"
+              mat-icon-button
+              matSuffix
+              (click)="search.reset()">
+        <mat-icon>clear</mat-icon>
+      </button>
+    </mat-form-field>
+
+    <button mat-raised-button
+            color="primary"
+            (click)="openAddDialog()">
+      <mat-icon>add</mat-icon>
+      Create
+    </button>
+  </div>
+
+  <table mat-table [dataSource]="contacts$">
+
+    <ng-container matColumnDef="firstName">
+      <th mat-header-cell *matHeaderCellDef> First Name </th>
+      <td mat-cell *matCellDef="let element"> {{element.firstName}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="lastName">
+      <th mat-header-cell *matHeaderCellDef> Last Name </th>
+      <td mat-cell *matCellDef="let element"> {{element.lastName}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="phoneNumber">
+      <th mat-header-cell *matHeaderCellDef> Phone Number </th>
+      <td mat-cell *matCellDef="let element"> {{element.phoneNumber}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell
+          *matHeaderCellDef>
+            <span style="display: block; text-align: center">
+              Actions
+            </span>
+      </th>
+      <td mat-cell
+          *matCellDef="let element"
+          style="text-align: center">
+        <div>
+          <button (click)="$event.preventDefault(); onEdit(element)"
+                  mat-icon-button
+                  color="primary">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button (click)="$event.preventDefault(); onDelete(element)"
+                  mat-icon-button
+                  color="warn">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row
+        *matRowDef="let row; columns: displayedColumns;"
+        (click)="onContactSelect(row)">
+
+    </tr>
+  </table>
+
+</div>
