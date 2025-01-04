@@ -1,7 +1,7 @@
-import {FormControl} from "@angular/forms";
+import { FormControl } from '@angular/forms';
 
 export interface Contact {
-  id: number | null;
+  id: number;
   firstName: string;
   lastName: string;
   phoneNumber: string;
@@ -9,7 +9,6 @@ export interface Contact {
   birthDate?: string;
   address?: string;
 }
-
 
 export interface ContactForm {
   id: FormControl<number | null>;

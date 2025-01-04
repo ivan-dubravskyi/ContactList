@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import {Contact} from "../models";
+import { Contact } from '../models';
 
 @Injectable({
   providedIn: 'root',
@@ -27,7 +27,7 @@ export class ContactListService {
 
   saveContact(contact: Contact): void {
     const contacts = this.contactsSubject.value;
-    const index = contacts.findIndex(c => c.id === contact.id);
+    const index = contacts.findIndex((c) => c.id === contact.id);
 
     if (index !== -1) {
       contacts[index] = contact;
@@ -42,16 +42,16 @@ export class ContactListService {
 
   getContactById(id: number): Contact | null {
     const contacts = this.loadContactsFromLocalStorage();
-    return contacts.find(contact => contact.id === id) || null;
+    return contacts.find((contact) => contact.id === id) || null;
   }
 
   deleteContact(id: number): void {
-    const contacts = this.contactsSubject.value.filter(contact => contact.id !== id);
+    const contacts = this.contactsSubject.value.filter(
+      (contact) => contact.id !== id,
+    );
     this.contactsSubject.next(contacts);
     this.saveContactsToLocalStorage(contacts);
   }
-
-
 
   private loadContactsFromLocalStorage(): Contact[] {
     const storedContacts = localStorage.getItem(this.storageKey);
@@ -59,17 +59,29 @@ export class ContactListService {
   }
 
   private saveContactsToLocalStorage(contacts: Contact[]): void {
-    localStorage.setItem(
-      this.storageKey,
-      JSON.stringify(contacts)
-    );
+    localStorage.setItem(this.storageKey, JSON.stringify(contacts));
   }
-
 
   private mockData() {
     const initialContacts: Contact[] = [
-      { id: 1, firstName: 'John', lastName: 'Doe', phoneNumber: '123-456-7890', email: 'john.doe@example.com', birthDate: '1990-01-01', address: '123 Main St' },
-      { id: 2, firstName: 'Jane', lastName: 'Smith', phoneNumber: '987-654-3210', email: 'jane.smith@example.com', birthDate: '1995-05-15', address: '456 Elm St' }
+      {
+        id: 1,
+        firstName: 'John',
+        lastName: 'Doe',
+        phoneNumber: '123-456-7890',
+        email: 'john.doe@example.com',
+        birthDate: '1990-01-01',
+        address: '123 Main St',
+      },
+      {
+        id: 2,
+        firstName: 'Jane',
+        lastName: 'Smith',
+        phoneNumber: '987-654-3210',
+        email: 'jane.smith@example.com',
+        birthDate: '1995-05-15',
+        address: '456 Elm St',
+      },
     ];
     this.contactsSubject.next(initialContacts);
     this.saveContactsToLocalStorage(initialContacts);

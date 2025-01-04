@@ -8,10 +8,9 @@ describe('ContactEditorComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ContactEditorComponent]
-    })
-    .compileComponents();
-    
+      imports: [ContactEditorComponent],
+    }).compileComponents();
+
     fixture = TestBed.createComponent(ContactEditorComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

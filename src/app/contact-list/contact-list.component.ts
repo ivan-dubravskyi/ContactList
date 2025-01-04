@@ -1,38 +1,48 @@
-import {Component, OnInit} from '@angular/core';
-import { MatFormFieldModule } from "@angular/material/form-field";
-import { MatInputModule } from "@angular/material/input";
-import { MatIconModule } from "@angular/material/icon";
-import { FormControl, ReactiveFormsModule } from "@angular/forms";
-import { MatButtonModule } from "@angular/material/button";
-import {CommonModule} from "@angular/common";
-import {MatTableModule} from "@angular/material/table";
-import {ContactListService} from "../core/services/contact-list.service";
-import {combineLatest, map, startWith} from "rxjs";
-import {Contact} from "../core/models";
-import {Router} from "@angular/router";
+import { Component, OnInit } from '@angular/core';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { CommonModule } from '@angular/common';
+import { MatTableModule } from '@angular/material/table';
+import { ContactListService } from '../core/services/contact-list.service';
+import { combineLatest, map, startWith } from 'rxjs';
+import { Contact } from '../core/models';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-contact-list',
   standalone: true,
-  imports: [ CommonModule, MatFormFieldModule, MatInputModule, MatIconModule, ReactiveFormsModule, MatButtonModule, MatTableModule],
+  imports: [
+    CommonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatIconModule,
+    ReactiveFormsModule,
+    MatButtonModule,
+    MatTableModule,
+  ],
   templateUrl: './contact-list.component.html',
-  styleUrl: './contact-list.component.scss'
+  styleUrl: './contact-list.component.scss',
 })
 export class ContactListComponent implements OnInit {
-
   search: FormControl = new FormControl('');
-  displayedColumns: string[] = ['firstName', 'lastName', 'phoneNumber', 'actions'];
+  displayedColumns: string[] = [
+    'firstName',
+    'lastName',
+    'phoneNumber',
+    'actions',
+  ];
   contacts$ = combineLatest([
     this.contactListService.contacts$,
-    this.search.valueChanges.pipe(startWith(''))
-  ]).pipe(
-    map(([contacts, search ]) => this.searchContacts(contacts, search)),
-  );
+    this.search.valueChanges.pipe(startWith('')),
+  ]).pipe(map(([contacts, search]) => this.searchContacts(contacts, search)));
 
   constructor(
     private contactListService: ContactListService,
-    private router: Router
-) { }
+    private router: Router,
+  ) {}
 
   ngOnInit() {
     this.contactListService.initializeContacts();
@@ -42,26 +52,26 @@ export class ContactListComponent implements OnInit {
     this.router.navigate(['new']);
   }
 
-  onDelete(element: any) {
-    console.log(element)
-    this.contactListService.deleteContact(element.id)
+  onDelete(element: Contact) {
+    console.log(element);
+    this.contactListService.deleteContact(element.id);
   }
 
   onEdit(row: Contact) {
-    this.router.navigate(['contact', row.id, 'edit'])
+    this.router.navigate(['contact', row.id, 'edit']);
   }
 
   onContactSelect(row: Contact) {
-    this.router.navigate(['contact', row.id])
+    this.router.navigate(['contact', row.id]);
   }
 
   private searchContacts(contacts: Contact[], searchQuery: string): Contact[] {
     const query = searchQuery?.toLowerCase() || '';
-    return contacts.filter(contact =>
-      contact.firstName.toLowerCase().includes(query) ||
-      contact.lastName.toLowerCase().includes(query) ||
-      contact.phoneNumber.includes(query)
+    return contacts.filter(
+      (contact) =>
+        contact.firstName.toLowerCase().includes(query) ||
+        contact.lastName.toLowerCase().includes(query) ||
+        contact.phoneNumber.includes(query),
     );
   }
-
 }
