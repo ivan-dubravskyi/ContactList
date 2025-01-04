@@ -50,12 +50,12 @@
           *matCellDef="let element"
           style="text-align: center">
         <div>
-          <button (click)="$event.preventDefault(); onEdit(element)"
+          <button (click)="$event.stopPropagation(); onEdit(element)"
                   mat-icon-button
                   color="primary">
             <mat-icon>edit</mat-icon>
           </button>
-          <button (click)="$event.preventDefault(); onDelete(element)"
+          <button (click)="$event.stopPropagation(); onDelete(element)"
                   mat-icon-button
                   color="warn">
             <mat-icon>delete</mat-icon>

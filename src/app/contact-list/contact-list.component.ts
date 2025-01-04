@@ -42,14 +42,16 @@ export class ContactListComponent implements OnInit {
   }
 
   openAddDialog(): void {
-    const dialogRef = this.dialog.open(AddContactDialogComponent);
+    this.router.navigate(['new']);
 
-    dialogRef.afterClosed().subscribe(result => {
-      if (result !== undefined) {
-        console.log(result)
-        this.contactListService.saveContact(result);
-      }
-    });
+    // const dialogRef = this.dialog.open(AddContactDialogComponent);
+    //
+    // dialogRef.afterClosed().subscribe(result => {
+    //   if (result !== undefined) {
+    //     console.log(result)
+    //     this.contactListService.saveContact(result);
+    //   }
+    // });
   }
 
   onDelete(element: any) {
@@ -57,8 +59,8 @@ export class ContactListComponent implements OnInit {
     this.contactListService.deleteContact(element.id)
   }
 
-  onEdit(element: any) {
-    console.log(element)
+  onEdit(row: Contact) {
+    this.router.navigate(['contact', row.id, 'edit'])
   }
 
   onContactSelect(row: Contact) {

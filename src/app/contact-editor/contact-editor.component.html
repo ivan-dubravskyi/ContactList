@@ -1,1 +1,75 @@
-<p>contact-editor works!</p>
+<mat-card class="contact">
+
+  <div style="display: flex; justify-content: space-between; align-items: center; gap: 1rem">
+    <button mat-icon-button
+            (click)="navigateBack()">
+      <mat-icon>west</mat-icon>
+    </button>
+
+    <div style="flex: 1; display: flex; align-items: center; gap: 10px">
+      <div class="avatar"
+           [style.background-color]="'green'">
+              {{ contact?.firstName?.charAt(0) }}
+      </div>
+
+      <h1 style="margin: 0;">
+        {{contact?.firstName}} {{contact?.lastName}}
+      </h1>
+    </div>
+
+    <button mat-raised-button
+            color="primary"
+            (click)="onSave()">
+      Save
+    </button>
+  </div>
+
+  <form class="contact-info"
+        [formGroup]="contactInfoGroup">
+    <mat-form-field appearance="outline">
+      <mat-label>FirstName</mat-label>
+      <input formControlName="firstName"
+             matInput
+             placeholder="FirstName">
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Last Name</mat-label>
+      <input formControlName="lastName"
+             matInput
+             placeholder="Last Name">
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Phone Number</mat-label>
+      <input formControlName="phoneNumber"
+             matInput
+             placeholder="Phone Number">
+      <mat-icon matPrefix>phone</mat-icon>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Email</mat-label>
+      <input formControlName="email"
+             matInput
+             placeholder="Email">
+      <mat-icon matPrefix>email</mat-icon>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Address</mat-label>
+      <input formControlName="address"
+             matInput
+             placeholder="Address">
+      <mat-icon matPrefix>home</mat-icon>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Birthday</mat-label>
+      <input formControlName="address"
+             matInput
+             placeholder="Birthday">
+      <mat-icon matPrefix>date_range</mat-icon>
+    </mat-form-field>
+
+  </form>
+
+</mat-card>

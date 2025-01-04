@@ -52,4 +52,11 @@ export class ContactViewComponent implements OnInit {
   navigateBack() {
     this.router.navigate([''])
   }
+
+  onEdit() {
+    this.router.navigate(
+      ['edit'],
+      { relativeTo: this.activatedRoute }
+    );
+  }
 }

@@ -22,7 +22,7 @@ export const routes: Routes = [
     component: ContactEditorComponent
   },
   {
-    path: 'contact/new',
+    path: 'new',
     component: ContactEditorComponent
   },
 ];
