@@ -5,9 +5,10 @@ import {MatIcon} from "@angular/material/icon";
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatFormField, MatLabel, MatPrefix} from "@angular/material/form-field";
 import {MatInput} from "@angular/material/input";
-import {ActivatedRoute, Router} from "@angular/router";
+import {ActivatedRoute} from "@angular/router";
 import {ContactListService} from "../core/services/contact-list.service";
 import {Contact, ContactForm} from "../core/models";
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-contact-editor',
@@ -42,13 +43,12 @@ export class ContactEditorComponent implements OnInit {
 
   constructor(
     private contactsService: ContactListService,
-    private router: Router,
-    private activatedRoute: ActivatedRoute
+    private location: Location,
+    private activatedRoute: ActivatedRoute,
   ) {
   }
 
   ngOnInit() {
-    this.contactsService.initializeContacts();
     const contactId = +this.activatedRoute.snapshot.params["id"];
     this.contact = this.contactsService.getContactById(contactId);
     if (this.contact) {
@@ -60,10 +60,7 @@ export class ContactEditorComponent implements OnInit {
 
 
   navigateBack() {
-    this.router.navigate(
-      ['..'],
-      {relativeTo: this.activatedRoute}
-    )
+    this.location.back();
   }
 
   onSave() {
