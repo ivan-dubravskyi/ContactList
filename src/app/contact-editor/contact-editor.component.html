@@ -13,11 +13,12 @@
       </div>
 
       <h1 style="margin: 0;">
-        {{contact?.firstName}} {{contact?.lastName}}
+        {{ contact?.firstName }} {{ contact?.lastName }}
       </h1>
     </div>
 
     <button mat-raised-button
+            [disabled]="contactInfoGroup.invalid || contactInfoGroup.pristine"
             color="primary"
             (click)="onSave()">
       Save
@@ -32,16 +33,21 @@
              matInput
              placeholder="FirstName">
     </mat-form-field>
+
     <mat-form-field appearance="outline">
       <mat-label>Last Name</mat-label>
       <input formControlName="lastName"
              matInput
              placeholder="Last Name">
     </mat-form-field>
+
     <mat-form-field appearance="outline">
       <mat-label>Phone Number</mat-label>
       <input formControlName="phoneNumber"
              matInput
+             #phoneInput
+             (keydown)="disallowNonNumericInput($event)"
+             (keyup)="formatToPhone(phoneInput)"
              placeholder="Phone Number">
       <mat-icon matPrefix>phone</mat-icon>
     </mat-form-field>
@@ -71,7 +77,7 @@
       <mat-datepicker-toggle matIconPrefix
                              [for]="picker">
       </mat-datepicker-toggle>
-      <mat-datepicker #picker></mat-datepicker>
+      <mat-datepicker startView="multi-year" #picker></mat-datepicker>
     </mat-form-field>
 
   </form>
