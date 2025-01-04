@@ -14,8 +14,6 @@ export class ContactListService {
   // private loader = new BehaviorSubject<boolean>(false);
   // public showLoader$: Observable<boolean> = this.loader.asObservable();
 
-  constructor() {}
-
   initializeContacts(): void {
     const contacts = this.loadContactsFromLocalStorage();
     this.contactsSubject.next(contacts);

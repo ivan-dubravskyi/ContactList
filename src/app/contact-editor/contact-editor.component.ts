@@ -1,38 +1,35 @@
 import { Component, OnInit } from '@angular/core';
-import { MatButton, MatIconButton } from '@angular/material/button';
+import { MatButtonModule } from '@angular/material/button';
 import { MatCard } from '@angular/material/card';
-import { MatIcon } from '@angular/material/icon';
+import { MatIconModule } from '@angular/material/icon';
 import {
   FormControl,
   FormGroup,
   FormsModule,
   ReactiveFormsModule,
 } from '@angular/forms';
-import {
-  MatFormField,
-  MatLabel,
-  MatPrefix,
-} from '@angular/material/form-field';
-import { MatInput } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 import { ActivatedRoute } from '@angular/router';
 import { ContactListService } from '../core/services/contact-list.service';
 import { Contact, ContactForm } from '../core/models';
 import { Location } from '@angular/common';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 @Component({
   selector: 'app-contact-editor',
   standalone: true,
   imports: [
-    MatButton,
     MatCard,
-    MatIcon,
-    MatIconButton,
+    MatButtonModule,
+    MatIconModule,
     FormsModule,
-    MatFormField,
-    MatInput,
-    MatLabel,
     ReactiveFormsModule,
-    MatPrefix,
+    MatFormFieldModule,
+    MatInputModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
   ],
   templateUrl: './contact-editor.component.html',
   styleUrl: './contact-editor.component.scss',

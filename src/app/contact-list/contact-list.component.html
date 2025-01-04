@@ -6,7 +6,7 @@
              matInput
              type="text">
       <mat-icon matPrefix>search</mat-icon>
-      <button *ngIf="search.value"
+      <button [style.visibility]="search.value ? 'visible' : 'hidden'"
               mat-icon-button
               matSuffix
               (click)="search.reset()">
