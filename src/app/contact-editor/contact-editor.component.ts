@@ -13,10 +13,14 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { ActivatedRoute } from '@angular/router';
 import { ContactListService } from '../core/services/contact-list.service';
-import { Contact, ContactForm } from '../core/models';
+import { ConfirmationDialogData, Contact, ContactForm } from '../core/models';
 import { Location } from '@angular/common';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { CanComponentDeactivate } from '../core/guards/can-deactivate.guard';
+import { ConfirmationDialogComponent } from '../shared/confirmation-dialog/confirmation-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
+import { map, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-contact-editor',
@@ -35,7 +39,7 @@ import { MatNativeDateModule } from '@angular/material/core';
   templateUrl: './contact-editor.component.html',
   styleUrl: './contact-editor.component.scss',
 })
-export class ContactEditorComponent implements OnInit {
+export class ContactEditorComponent implements OnInit, CanComponentDeactivate {
   contact: Contact | null = null;
   contactInfoGroup = new FormGroup<ContactForm>({
     id: new FormControl(null),
@@ -51,6 +55,7 @@ export class ContactEditorComponent implements OnInit {
     private contactsService: ContactListService,
     private location: Location,
     private activatedRoute: ActivatedRoute,
+    public dialog: MatDialog,
   ) {}
 
   ngOnInit() {
@@ -96,5 +101,27 @@ export class ContactEditorComponent implements OnInit {
       return;
     }
     evt.preventDefault();
+  }
+
+  canDeactivate(): Observable<boolean> | boolean {
+    if (this.contactInfoGroup.dirty) {
+      return this.openConfirmDialog();
+    }
+    return true;
+  }
+
+  private openConfirmDialog(): Observable<boolean> {
+    const dialogRef = this.dialog.open<
+      ConfirmationDialogComponent,
+      ConfirmationDialogData,
+      boolean
+    >(ConfirmationDialogComponent, {
+      data: {
+        title: 'Unsaved changes',
+        content: 'Are you sure you want to discard your unsaved changes?',
+      },
+    });
+
+    return dialogRef.afterClosed().pipe(map((confirmed) => !!confirmed));
   }
 }
