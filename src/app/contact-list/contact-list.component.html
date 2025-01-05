@@ -10,10 +10,13 @@
   </button>
 </div>
 
+<!--@let contacts = contacts$ | async cool feature but doesn't work for some reason (-->
 @if ((contacts$ | async); as contacts) {
-  <app-list-table [contacts]="contacts"></app-list-table>
-} @else {
-  <div class="empty-state">
-    <p>No contacts added yet.</p>
-  </div>
+  @if (contacts.length) {
+    <app-list-table [contacts]="contacts"></app-list-table>
+  } @else {
+    <div class="empty-state">
+      <p>No contacts added yet.</p>
+    </div>
+  }
 }
