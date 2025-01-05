@@ -1,20 +1,18 @@
-<mat-card class="contact">
+<mat-card class="d-flex flex-column gap-10">
 
-  <div style="display: flex; justify-content: space-between; align-items: center; gap: 1rem">
+  <div class="d-flex ai-center gap-10">
     <button mat-icon-button
             (click)="navigateBack()">
       <mat-icon>west</mat-icon>
     </button>
 
     @if (contactInfoGroup.value; as contact) {
-      <div style="flex: 1; display: flex; align-items: center; gap: 10px">
+      <div class="d-flex ai-center gap-10 flex-1">
         <app-avatar [color]="assignColorBasedOnId(contact?.id || 0)"
                     [label]="contact?.firstName?.charAt(0) || ''">
         </app-avatar>
 
-        <h1 style="margin: 0;">
-          {{ contact.firstName }} {{ contact.lastName }}
-        </h1>
+        <h1>{{ contact.firstName }} {{ contact.lastName }}</h1>
       </div>
     }
 
@@ -26,7 +24,7 @@
     </button>
   </div>
 
-  <form class="contact-info"
+  <form class="content d-flex flex-column gap-5"
         [formGroup]="contactInfoGroup">
     <mat-form-field appearance="outline">
       <mat-label>FirstName</mat-label>

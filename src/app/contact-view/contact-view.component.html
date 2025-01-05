@@ -1,11 +1,11 @@
-<mat-card class="contact">
+<mat-card class="d-flex flex-column gap-10">
 
-  <div style="display: flex; justify-content: space-between">
+  <div class="d-flex jc-between">
     <button mat-icon-button
             (click)="navigateBack()">
       <mat-icon>west</mat-icon>
     </button>
-    <div style="display: flex; align-items: center">
+    <div class="d-flex ai-center">
       <button mat-raised-button
               color="primary"
               (click)="onEdit()">
@@ -19,7 +19,7 @@
     </div>
   </div>
 
-  <div style="display: flex; flex-direction: row; align-items: center">
+  <div class="d-flex ai-center">
     <app-avatar [color]="assignColorBasedOnId(contact?.id || 0)"
                 [label]="contact?.firstName?.charAt(0) || ''"
                 size="large">
@@ -27,7 +27,7 @@
     <h1>{{ contact?.firstName }} {{ contact?.lastName }}</h1>
   </div>
 
-  <div class="contact-info">
+  <div class="content d-flex flex-column gap-10">
     <a [href]="'tel:' + contact?.phoneNumber">
       <mat-icon>phone</mat-icon>
       {{ contact?.phoneNumber }}

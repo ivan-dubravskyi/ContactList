@@ -1,35 +1,10 @@
-.contact {
-  margin: 20px 0;
-  padding: 20px;
-
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-
-  h1 {
-    margin: 20px;
-  }
+h1 {
+  margin: 20px;
 }
 
-.custom-avatar {
-  width: 100px;
-  height: 100px;
-  font-size: 3rem!important;
-}
-
-.contact-info {
-  padding: 20px;
-  background: aliceblue;
-  border-radius: 8px;
-  color: #585858;
+p, a {
   display: flex;
-  flex-direction: column;
-  gap: 12px;
-
-  p, a {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin: 0;
-  }
+  align-items: center;
+  gap: 10px;
+  margin: 0;
 }

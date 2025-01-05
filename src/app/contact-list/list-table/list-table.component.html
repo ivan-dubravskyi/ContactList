@@ -2,7 +2,7 @@
        [dataSource]="contacts">
 
   <ng-container matColumnDef="name">
-    <th mat-header-cell *matHeaderCellDef> Name </th>
+    <th mat-header-cell *matHeaderCellDef> Name</th>
     <td mat-cell *matCellDef="let element">
       <div class="name-container">
         <app-avatar [color]="assignColorBasedOnId(element?.id || 0)"
@@ -28,14 +28,11 @@
   <ng-container matColumnDef="actions">
     <th mat-header-cell
         *matHeaderCellDef>
-            <span style="display: block; text-align: center">
-              Actions
-            </span>
+      <span class="d-flex jc-center">Actions</span>
     </th>
     <td mat-cell
-        *matCellDef="let element"
-        style="text-align: center">
-      <div>
+        *matCellDef="let element">
+      <div class="d-flex jc-center">
         <button (click)="$event.stopPropagation(); onEdit(element)"
                 mat-icon-button
                 color="primary">
