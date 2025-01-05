@@ -13,16 +13,15 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { ActivatedRoute } from '@angular/router';
 import { ContactListService } from '../core/services/contact-list.service';
-import { ConfirmationDialogData, Contact, ContactForm } from '../core/models';
+import { Contact, ContactForm } from '../core/models';
 import { Location } from '@angular/common';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { CanComponentDeactivate } from '../core/guards/can-deactivate.guard';
-import { ConfirmationDialogComponent } from '../shared/confirmation-dialog/confirmation-dialog.component';
-import { MatDialog } from '@angular/material/dialog';
-import { map, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { assignColorBasedOnId } from '../core/helpers/contact-color.helper';
-import {AvatarComponent} from "../shared/avatar/avatar.component";
+import { AvatarComponent } from '../shared/avatar/avatar.component';
+import { DialogService } from '../core/services/dialog.service';
 
 @Component({
   selector: 'app-contact-editor',
@@ -60,7 +59,7 @@ export class ContactEditorComponent implements OnInit, CanComponentDeactivate {
     private contactsService: ContactListService,
     private location: Location,
     private activatedRoute: ActivatedRoute,
-    public dialog: MatDialog,
+    public dialog: DialogService,
   ) {}
 
   ngOnInit() {
@@ -111,23 +110,11 @@ export class ContactEditorComponent implements OnInit, CanComponentDeactivate {
 
   canDeactivate(): Observable<boolean> | boolean {
     if (this.contactInfoGroup.dirty) {
-      return this.openConfirmDialog();
+      return this.dialog.openConfirmationDialog(
+        'Unsaved changes',
+        'Are you sure you want to discard your unsaved changes?',
+      );
     }
     return true;
-  }
-
-  private openConfirmDialog(): Observable<boolean> {
-    const dialogRef = this.dialog.open<
-      ConfirmationDialogComponent,
-      ConfirmationDialogData,
-      boolean
-    >(ConfirmationDialogComponent, {
-      data: {
-        title: 'Unsaved changes',
-        content: 'Are you sure you want to discard your unsaved changes?',
-      },
-    });
-
-    return dialogRef.afterClosed().pipe(map((confirmed) => !!confirmed));
   }
 }

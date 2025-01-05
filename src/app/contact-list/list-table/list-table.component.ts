@@ -7,8 +7,9 @@ import { ConfirmationDialogComponent } from '../../shared/confirmation-dialog/co
 import { ContactListService } from '../../core/services/contact-list.service';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
-import {AvatarComponent} from "../../shared/avatar/avatar.component";
-import {assignColorBasedOnId} from "../../core/helpers/contact-color.helper";
+import { AvatarComponent } from '../../shared/avatar/avatar.component';
+import { assignColorBasedOnId } from '../../core/helpers/contact-color.helper';
+import {DialogService} from "../../core/services/dialog.service";
 
 @Component({
   selector: 'app-list-table',
@@ -20,31 +21,19 @@ import {assignColorBasedOnId} from "../../core/helpers/contact-color.helper";
 export class ListTableComponent {
   @Input({ required: true }) contacts: Contact[] = [];
 
-  displayedColumns: string[] = [
-    'name',
-    'phoneNumber',
-    'actions',
-  ];
+  displayedColumns: string[] = ['name', 'phoneNumber', 'actions'];
 
   constructor(
     private contactListService: ContactListService,
     private router: Router,
-    public dialog: MatDialog,
+    private dialogService: DialogService,
   ) {}
 
   onDelete(element: Contact) {
-    const dialogRef = this.dialog.open<
-      ConfirmationDialogComponent,
-      ConfirmationDialogData,
-      boolean
-    >(ConfirmationDialogComponent, {
-      data: {
-        title: 'Delete Contact',
-        content: 'Are you sure you want to delete this contact?',
-      },
-    });
-
-    dialogRef.afterClosed().subscribe((result) => {
+    this.dialogService.openConfirmationDialog(
+      'Delete Contact',
+      'Are you sure you want to delete this contact?'
+    ).subscribe((result) => {
       if (result) {
         this.contactListService.deleteContact(element.id);
       }
