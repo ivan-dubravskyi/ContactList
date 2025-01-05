@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ContactListService } from '../core/services/contact-list.service';
-import {ActivatedRoute, Router, RouterLink} from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Contact } from '../core/models';
 import { MatCard } from '@angular/material/card';
 import { MatButton, MatIconButton } from '@angular/material/button';
