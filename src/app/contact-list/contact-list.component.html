@@ -16,7 +16,7 @@
     <app-list-table [contacts]="contacts"></app-list-table>
   } @else {
     <div class="empty-state">
-      <p>No contacts added yet.</p>
+      <p>{{search.value ? 'Sorry, nothing found (' : 'No contacts added yet.' }}</p>
     </div>
   }
 }
