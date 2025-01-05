@@ -1,0 +1,13 @@
+<mat-form-field appearance="outline">
+  <mat-label>Search</mat-label>
+  <input [formControl]="searchControl"
+         matInput
+         type="text">
+  <mat-icon matPrefix>search</mat-icon>
+  <button [style.visibility]="searchControl.value ? 'visible' : 'hidden'"
+          mat-icon-button
+          matSuffix
+          (click)="searchControl.reset()">
+    <mat-icon>clear</mat-icon>
+  </button>
+</mat-form-field>

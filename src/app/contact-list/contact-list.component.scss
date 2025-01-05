@@ -1,8 +1,12 @@
-tr {
-  cursor: pointer;
+.head-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
 
-  &:hover {
-    background: #dee6ff;
+  .add-button {
+    padding: 30px;
+    border-radius: 30px;
   }
 }
 
