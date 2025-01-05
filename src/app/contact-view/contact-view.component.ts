@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ContactListService } from '../core/services/contact-list.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import {ActivatedRoute, Router, RouterLink} from '@angular/router';
 import { Contact } from '../core/models';
 import { MatCard } from '@angular/material/card';
 import { MatButton, MatIconButton } from '@angular/material/button';
@@ -20,6 +20,7 @@ import { DialogService } from '../core/services/dialog.service';
     MatButton,
     DatePipe,
     AvatarComponent,
+    RouterLink,
   ],
   templateUrl: './contact-view.component.html',
   styleUrl: './contact-view.component.scss',

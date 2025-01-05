@@ -34,15 +34,27 @@
     </a>
     <p>
       <mat-icon>email</mat-icon>
-      {{ contact?.email }}
+      @if (contact?.email; ) {
+        {{ contact?.email }}
+      } @else {
+        <a routerLink="edit">Add email</a>
+      }
     </p>
     <p>
       <mat-icon>home</mat-icon>
-      {{ contact?.address }}
+      @if (contact?.address; ) {
+        {{ contact?.address }}
+      } @else {
+        <a routerLink="edit">Add address</a>
+      }
     </p>
     <p>
       <mat-icon>date_range</mat-icon>
-      {{ contact?.birthDate | date: 'mediumDate' }}
+      @if (contact?.birthDate; ) {
+        {{ contact?.birthDate | date: 'mediumDate' }}
+      } @else {
+        <a routerLink="edit">Add birthday</a>
+      }
     </p>
   </div>
 
