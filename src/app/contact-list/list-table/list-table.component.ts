@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { AvatarComponent } from '../../shared/avatar/avatar.component';
 import { assignColorBasedOnId } from '../../core/helpers/contact-color.helper';
-import {DialogService} from "../../core/services/dialog.service";
+import { DialogService } from '../../core/services/dialog.service';
 
 @Component({
   selector: 'app-list-table',
@@ -30,14 +30,16 @@ export class ListTableComponent {
   ) {}
 
   onDelete(element: Contact) {
-    this.dialogService.openConfirmationDialog(
-      'Delete Contact',
-      'Are you sure you want to delete this contact?'
-    ).subscribe((result) => {
-      if (result) {
-        this.contactListService.deleteContact(element.id);
-      }
-    });
+    this.dialogService
+      .openConfirmationDialog(
+        'Delete Contact',
+        'Are you sure you want to delete this contact?',
+      )
+      .subscribe((result) => {
+        if (result) {
+          this.contactListService.deleteContact(element.id);
+        }
+      });
   }
 
   onEdit(row: Contact) {

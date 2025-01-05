@@ -8,7 +8,7 @@ import { MatIcon } from '@angular/material/icon';
 import { DatePipe } from '@angular/common';
 import { assignColorBasedOnId } from '../core/helpers/contact-color.helper';
 import { AvatarComponent } from '../shared/avatar/avatar.component';
-import {DialogService} from "../core/services/dialog.service";
+import { DialogService } from '../core/services/dialog.service';
 
 @Component({
   selector: 'app-contact-view',
@@ -54,14 +54,16 @@ export class ContactViewComponent implements OnInit {
       return;
     }
 
-    this.dialogService.openConfirmationDialog(
-      'Delete Contact',
-      'Are you sure you want to delete this contact?'
-    ).subscribe((result) => {
-      if (result) {
-        this.contactsService.deleteContact(contact.id);
-        this.navigateBack();
-      }
-    });
+    this.dialogService
+      .openConfirmationDialog(
+        'Delete Contact',
+        'Are you sure you want to delete this contact?',
+      )
+      .subscribe((result) => {
+        if (result) {
+          this.contactsService.deleteContact(contact.id);
+          this.navigateBack();
+        }
+      });
   }
 }
