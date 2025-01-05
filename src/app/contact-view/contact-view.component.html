@@ -21,7 +21,7 @@
 
   <div style="display: flex; flex-direction: row; align-items: center">
     <div class="avatar"
-         [style.background-color]="generateRandomColor()">
+         [style.background-color]="assignColorBasedOnId(contact?.id || 0)">
       {{ contact?.firstName?.charAt(0) }}
     </div>
     <h1>{{ contact?.firstName }} {{ contact?.lastName }}</h1>

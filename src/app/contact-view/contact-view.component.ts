@@ -6,8 +6,7 @@ import { MatCard } from '@angular/material/card';
 import { MatButton, MatIconButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { DatePipe } from '@angular/common';
-
-const colors = ['#ff5050', '#5079ff', '#50ff59', '#d950ff'];
+import { assignColorBasedOnId } from '../core/helpers/contact-color.helper';
 
 @Component({
   selector: 'app-contact-view',
@@ -19,6 +18,8 @@ const colors = ['#ff5050', '#5079ff', '#50ff59', '#d950ff'];
 export class ContactViewComponent implements OnInit {
   contact: Contact | null = null;
 
+  protected readonly assignColorBasedOnId = assignColorBasedOnId;
+
   constructor(
     private contactsService: ContactListService,
     private activatedRoute: ActivatedRoute,
@@ -28,10 +29,6 @@ export class ContactViewComponent implements OnInit {
   ngOnInit() {
     const contactId = +this.activatedRoute.snapshot.params['id'];
     this.contact = this.contactsService.getContactById(contactId);
-  }
-
-  generateRandomColor(): string {
-    return colors[Math.floor(Math.random() * colors.length)];
   }
 
   navigateBack() {

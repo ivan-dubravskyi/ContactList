@@ -21,6 +21,7 @@ import { CanComponentDeactivate } from '../core/guards/can-deactivate.guard';
 import { ConfirmationDialogComponent } from '../shared/confirmation-dialog/confirmation-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { map, Observable } from 'rxjs';
+import { assignColorBasedOnId } from '../core/helpers/contact-color.helper';
 
 @Component({
   selector: 'app-contact-editor',
@@ -51,6 +52,8 @@ export class ContactEditorComponent implements OnInit, CanComponentDeactivate {
     address: new FormControl(''),
   });
 
+  protected readonly assignColorBasedOnId = assignColorBasedOnId;
+
   constructor(
     private contactsService: ContactListService,
     private location: Location,
@@ -72,6 +75,7 @@ export class ContactEditorComponent implements OnInit, CanComponentDeactivate {
 
   onSave() {
     this.contactsService.saveContact(this.contactInfoGroup.value as Contact);
+    this.contactInfoGroup.markAsPristine();
     this.navigateBack();
   }
 
@@ -94,7 +98,7 @@ export class ContactEditorComponent implements OnInit, CanComponentDeactivate {
     if (evt.ctrlKey) {
       return;
     }
-    if (evt.key.length > 1) {
+    if (evt.key?.length > 1) {
       return;
     }
     if (/[0-9.]/.test(evt.key)) {
