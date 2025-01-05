@@ -22,6 +22,7 @@ import { ConfirmationDialogComponent } from '../shared/confirmation-dialog/confi
 import { MatDialog } from '@angular/material/dialog';
 import { map, Observable } from 'rxjs';
 import { assignColorBasedOnId } from '../core/helpers/contact-color.helper';
+import {AvatarComponent} from "../shared/avatar/avatar.component";
 
 @Component({
   selector: 'app-contact-editor',
@@ -36,6 +37,7 @@ import { assignColorBasedOnId } from '../core/helpers/contact-color.helper';
     MatInputModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    AvatarComponent,
   ],
   templateUrl: './contact-editor.component.html',
   styleUrl: './contact-editor.component.scss',

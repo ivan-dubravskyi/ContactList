@@ -7,11 +7,13 @@ import { ConfirmationDialogComponent } from '../../shared/confirmation-dialog/co
 import { ContactListService } from '../../core/services/contact-list.service';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
+import {AvatarComponent} from "../../shared/avatar/avatar.component";
+import {assignColorBasedOnId} from "../../core/helpers/contact-color.helper";
 
 @Component({
   selector: 'app-list-table',
   standalone: true,
-  imports: [MatTableModule, MatIconModule, MatButtonModule],
+  imports: [MatTableModule, MatIconModule, MatButtonModule, AvatarComponent],
   templateUrl: './list-table.component.html',
   styleUrl: './list-table.component.scss',
 })
@@ -19,8 +21,7 @@ export class ListTableComponent {
   @Input({ required: true }) contacts: Contact[] = [];
 
   displayedColumns: string[] = [
-    'firstName',
-    'lastName',
+    'name',
     'phoneNumber',
     'actions',
   ];
@@ -57,4 +58,6 @@ export class ListTableComponent {
   onContactSelect(row: Contact) {
     this.router.navigate(['contact', row.id]);
   }
+
+  protected readonly assignColorBasedOnId = assignColorBasedOnId;
 }

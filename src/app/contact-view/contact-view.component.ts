@@ -7,11 +7,19 @@ import { MatButton, MatIconButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { DatePipe } from '@angular/common';
 import { assignColorBasedOnId } from '../core/helpers/contact-color.helper';
+import { AvatarComponent } from '../shared/avatar/avatar.component';
 
 @Component({
   selector: 'app-contact-view',
   standalone: true,
-  imports: [MatCard, MatIconButton, MatIcon, MatButton, DatePipe],
+  imports: [
+    MatCard,
+    MatIconButton,
+    MatIcon,
+    MatButton,
+    DatePipe,
+    AvatarComponent,
+  ],
   templateUrl: './contact-view.component.html',
   styleUrl: './contact-view.component.scss',
 })

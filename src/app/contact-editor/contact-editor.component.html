@@ -6,12 +6,11 @@
       <mat-icon>west</mat-icon>
     </button>
 
-    @if (contact) {
+    @if (contactInfoGroup.value; as contact) {
       <div style="flex: 1; display: flex; align-items: center; gap: 10px">
-        <div class="avatar"
-             [style.background-color]="assignColorBasedOnId(contact.id)">
-          {{ contact.firstName?.charAt(0) }}
-        </div>
+        <app-avatar [color]="assignColorBasedOnId(contact?.id || 0)"
+                    [label]="contact?.firstName?.charAt(0) || ''">
+        </app-avatar>
 
         <h1 style="margin: 0;">
           {{ contact.firstName }} {{ contact.lastName }}

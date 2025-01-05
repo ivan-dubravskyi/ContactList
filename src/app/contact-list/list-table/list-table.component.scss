@@ -4,4 +4,10 @@
   &:hover {
     background: #dee6ff;
   }
+
+  .name-container {
+    display: flex;
+    align-items: center;
+    gap: 10px
+  }
 }

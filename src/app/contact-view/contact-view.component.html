@@ -20,10 +20,10 @@
   </div>
 
   <div style="display: flex; flex-direction: row; align-items: center">
-    <div class="avatar"
-         [style.background-color]="assignColorBasedOnId(contact?.id || 0)">
-      {{ contact?.firstName?.charAt(0) }}
-    </div>
+    <app-avatar [color]="assignColorBasedOnId(contact?.id || 0)"
+                [label]="contact?.firstName?.charAt(0) || ''"
+                size="large">
+    </app-avatar>
     <h1>{{ contact?.firstName }} {{ contact?.lastName }}</h1>
   </div>
 
